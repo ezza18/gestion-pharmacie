@@ -14,4 +14,9 @@ class Produit extends Model
         'quantite',
         'date_expiration',
     ];
+
+    public function ventes()
+    {
+        return $this->hasMany(Vente::class);
+    }
 }

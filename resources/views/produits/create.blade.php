@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-
+@include('partials.navbar')
     <a href="{{ route('produits.index') }}" class="btn-back">&larr; Retour à la liste</a>
     <h1>Ajouter un Produit</h1>
 
