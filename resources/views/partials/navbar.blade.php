@@ -2,10 +2,13 @@
     * { box-sizing: border-box; }
     body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f5f6fa; }
     .layout { display: flex; min-height: 100vh; }
-    .sidebar { width: 240px; background: #1a2332; color: white; padding: 20px 0; flex-shrink: 0; }
+    .sidebar { width: 240px; background: #1a2332; color: white; padding: 20px 0; flex-shrink: 0; display: flex; flex-direction: column; }
     .sidebar .logo { padding: 0 20px 20px 20px; font-weight: bold; font-size: 18px; border-bottom: 1px solid #2c3a4f; margin-bottom: 20px; }
     .sidebar a { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: #b8c2cc; text-decoration: none; font-size: 14px; }
     .sidebar a:hover, .sidebar a.active { background: #2563eb; color: white; }
+    .sidebar .logout-form { margin-top: auto; }
+    .sidebar .logout-btn { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: #ff6b6b; background: none; border: none; cursor: pointer; font-size: 14px; width: 100%; text-align: left; }
+    .sidebar .logout-btn:hover { background: #2c3a4f; }
     .main-content { flex: 1; padding: 30px; }
 </style>
 <div class="layout">
@@ -15,5 +18,10 @@
         <a href="{{ url('/ventes') }}">💰 Ventes</a>
         <a href="{{ url('/achats') }}">🛒 Achats</a>
         <a href="{{ url('/finance') }}">📊 Finance</a>
+
+        <form action="{{ url('/logout') }}" method="POST" class="logout-form">
+            @csrf
+            <button type="submit" class="logout-btn">🚪 Déconnexion</button>
+        </form>
     </div>
     <div class="main-content">
