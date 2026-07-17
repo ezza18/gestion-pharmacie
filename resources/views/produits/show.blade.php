@@ -24,5 +24,8 @@
         <p><strong>Date d'expiration :</strong> {{ $produit->date_expiration }}</p>
     </div>
 
+       </div>
+</div>
+
 </body>
 </html>

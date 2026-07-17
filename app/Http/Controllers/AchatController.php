@@ -11,7 +11,11 @@ class AchatController extends Controller
     public function index()
     {
         $achats = Achat::with('produit')->orderBy('date_achat', 'desc')->get();
-        return view('achats.index', compact('achats'));
+        $totalAchats = $achats->count();
+        $montantTotal = $achats->sum('total');
+        $quantiteTotale = $achats->sum('quantite_achetee');
+
+        return view('achats.index', compact('achats', 'totalAchats', 'montantTotal', 'quantiteTotale'));
     }
 
     public function create()

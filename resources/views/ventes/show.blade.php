@@ -24,5 +24,8 @@
         <p><strong>Date :</strong> {{ $vente->date_vente }}</p>
     </div>
 
+       </div>
+</div>
+
 </body>
 </html>

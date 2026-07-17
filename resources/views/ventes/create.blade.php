@@ -42,5 +42,8 @@
         <button type="submit" class="btn">Enregistrer la vente</button>
     </form>
 
+       </div>
+</div>
+
 </body>
 </html>

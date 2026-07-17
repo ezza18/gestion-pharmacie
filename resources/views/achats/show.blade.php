@@ -26,5 +26,8 @@
         <p><strong>Date :</strong> {{ $achat->date_achat }}</p>
     </div>
 
+       </div>
+</div>
+
 </body>
 </html>

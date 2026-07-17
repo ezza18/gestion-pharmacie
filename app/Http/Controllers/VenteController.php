@@ -11,7 +11,11 @@ class VenteController extends Controller
     public function index()
     {
         $ventes = Vente::with('produit')->orderBy('date_vente', 'desc')->get();
-        return view('ventes.index', compact('ventes'));
+        $totalVentes = $ventes->count();
+        $montantTotal = $ventes->sum('total');
+        $quantiteTotale = $ventes->sum('quantite_vendue');
+
+        return view('ventes.index', compact('ventes', 'totalVentes', 'montantTotal', 'quantiteTotale'));
     }
 
     public function create()

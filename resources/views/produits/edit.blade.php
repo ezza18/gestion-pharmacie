@@ -48,5 +48,8 @@
         <button type="submit" class="btn">Mettre à jour</button>
     </form>
 
+       </div>
+</div>
+
 </body>
 </html>

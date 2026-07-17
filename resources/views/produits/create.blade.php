@@ -47,5 +47,8 @@
         <button type="submit" class="btn">Enregistrer</button>
     </form>
 
+       </div>
+</div>
+
 </body>
 </html>

@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <title>État Financier</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
+        body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
         h1 { color: #333; }
+        .breadcrumb { color: #888; font-size: 13px; margin-bottom: 15px; }
         .cards { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
-        .card { background: white; padding: 25px; border-radius: 8px; flex: 1; min-width: 200px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .card h2 { margin: 0; font-size: 16px; color: #666; }
-        .card p { font-size: 28px; font-weight: bold; margin: 10px 0 0 0; }
+        .card { background: white; padding: 25px; border-radius: 8px; flex: 1; min-width: 220px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+        .card h2 { margin: 0; font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card p { font-size: 30px; font-weight: bold; margin: 12px 0 0 0; }
+        .card small { color: #999; }
         .ventes p { color: #28a745; }
         .achats p { color: #dc3545; }
-        .benefice p { color: #007bff; }
+        .benefice p { color: #2563eb; }
         .benefice.negative p { color: #dc3545; }
     </style>
 </head>
 <body>
 @include('partials.navbar')
 
+    <div class="breadcrumb">Accueil &gt; Finance</div>
     <h1>État Financier</h1>
 
     <div class="cards">
@@ -40,6 +43,9 @@
             <small>{{ $benefice >= 0 ? 'Profit' : 'Perte' }}</small>
         </div>
     </div>
+
+    </div>
+</div>
 
 </body>
 </html>
