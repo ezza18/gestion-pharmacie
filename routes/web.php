@@ -6,6 +6,8 @@ use App\Http\Controllers\VenteController;
 use App\Http\Controllers\AchatController;
 use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -16,8 +18,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('produits', ProduitController::class);
     Route::resource('ventes', VenteController::class);
     Route::resource('achats', AchatController::class);
+    Route::resource('users', UserController::class);
     Route::get('/finance', [FinanceController::class, 'index'])->name('finance.index');
 });

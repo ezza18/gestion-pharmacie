@@ -14,10 +14,12 @@
 <div class="layout">
     <div class="sidebar">
         <div class="logo">🏥 Gestion Pharmacie</div>
+        <a href="{{ url('/dashboard') }}">🏠 Tableau de bord</a>
         <a href="{{ url('/produits') }}">📦 Produits</a>
         <a href="{{ url('/ventes') }}">💰 Ventes</a>
         <a href="{{ url('/achats') }}">🛒 Achats</a>
         <a href="{{ url('/finance') }}">📊 Finance</a>
+        <a href="{{ url('/users') }}">👥 Utilisateurs</a>
 
         <form action="{{ url('/logout') }}" method="POST" class="logout-form">
             @csrf
