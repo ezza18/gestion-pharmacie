@@ -12,6 +12,21 @@
         .btn { margin-top: 15px; padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
         .btn-back { display: inline-block; margin-bottom: 15px; text-decoration: none; color: #333; }
         .error { color: red; font-size: 14px; }
+        .produit-search-wrapper { position: relative; }
+        .produit-suggestions {
+            position: absolute; top: 100%; left: 0; right: 0;
+            background: white; border: 1px solid #ccc; border-top: none;
+            max-height: 220px; overflow-y: auto; z-index: 10;
+            border-radius: 0 0 4px 4px; display: none;
+        }
+        .produit-suggestions div {
+            padding: 8px; cursor: pointer; border-bottom: 1px solid #eee;
+        }
+        .produit-suggestions div:hover, .produit-suggestions div.active {
+            background: #007bff; color: white;
+        }
+        .produit-suggestions .no-result { color: #999; cursor: default; }
+        .produit-suggestions .no-result:hover { background: white; color: #999; }
     </style>
 </head>
 <body>
@@ -23,12 +38,11 @@
         @csrf
 
         <label>Produit</label>
-        <select name="produit_id">
-            <option value="">-- Choisir un produit --</option>
-            @foreach($produits as $produit)
-                <option value="{{ $produit->id }}">{{ $produit->nom }} (Stock: {{ $produit->quantite }})</option>
-            @endforeach
-        </select>
+        <div class="produit-search-wrapper">
+            <input type="text" id="produit_search" autocomplete="off" placeholder="Tapez le nom du médicament...">
+            <input type="hidden" name="produit_id" id="produit_id">
+            <div class="produit-suggestions" id="produit_suggestions"></div>
+        </div>
         @error('produit_id') <div class="error">{{ $message }}</div> @enderror
 
         <label>Quantité vendue</label>
@@ -44,6 +58,53 @@
 
        </div>
 </div>
+
+<script>
+    const produits = [
+        @foreach($produits as $produit)
+        { id: {{ $produit->id }}, nom: "{{ $produit->nom }}", stock: {{ $produit->quantite }} },
+        @endforeach
+    ];
+
+    const searchInput = document.getElementById('produit_search');
+    const hiddenInput = document.getElementById('produit_id');
+    const suggestionsBox = document.getElementById('produit_suggestions');
+
+    searchInput.addEventListener('input', function () {
+        const val = this.value.trim().toLowerCase();
+        hiddenInput.value = '';
+        suggestionsBox.innerHTML = '';
+
+        if (val.length === 0) {
+            suggestionsBox.style.display = 'none';
+            return;
+        }
+
+        const matches = produits.filter(p => p.nom.toLowerCase().includes(val));
+
+        if (matches.length === 0) {
+            suggestionsBox.innerHTML = '<div class="no-result">Aucun médicament trouvé</div>';
+        } else {
+            matches.forEach(p => {
+                const div = document.createElement('div');
+                div.textContent = p.nom + " (Stock: " + p.stock + ")";
+                div.addEventListener('click', function () {
+                    searchInput.value = p.nom;
+                    hiddenInput.value = p.id;
+                    suggestionsBox.style.display = 'none';
+                });
+                suggestionsBox.appendChild(div);
+            });
+        }
+        suggestionsBox.style.display = 'block';
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.produit-search-wrapper')) {
+            suggestionsBox.style.display = 'none';
+        }
+    });
+</script>
 
 </body>
 </html>
